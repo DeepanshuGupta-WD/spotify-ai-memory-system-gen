@@ -221,3 +221,6 @@ __marimo__/
 
 # Local ChromaDB persistent vector store.
 .chroma/
+
+# Node dependencies
+client/node_modules/
