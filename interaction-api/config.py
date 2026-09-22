@@ -97,6 +97,8 @@ class Settings(BaseSettings):
     "http://localhost:5173",
     "http://127.0.0.1:5173",
     "https://spotify-ai-memory-system-p4dbs2spl-deepanshugupta-wd.vercel.app",
+    "https://spotify-ai-memory-system-gen.vercel.app",
+        
 ]
     cors_allowed_origin_regex: str = r"https?://(localhost|127\.0\.0\.1)(:\d+)?"
 
