@@ -16,7 +16,7 @@ logger = get_logger(__name__)
 
 
 async def authenticate_request(
-    authorization: str | None = Header(default=None),
+   authorization: str | None = Header(default=None, alias="Authorization"),
     x_user_id: str | None = Header(default=None, alias="X-User-Id"),
 ) -> str:
     """FastAPI dependency: returns the resolved user_id or raises 401."""
