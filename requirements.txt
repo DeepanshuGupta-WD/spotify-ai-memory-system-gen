@@ -1,5 +1,5 @@
 neo4j>=5.20,<6.0
 python-dotenv>=1.0
-mcp>=1.2.0
+mcp<2
 chromadb>=0.5,<2.0
 pydantic>=2.0

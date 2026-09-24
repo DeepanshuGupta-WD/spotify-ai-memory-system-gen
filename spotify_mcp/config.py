@@ -23,7 +23,8 @@ class MCPConfig:
     # (recommended) or sse when an external host connects by URL.
     transport: str = os.getenv("MCP_TRANSPORT", "stdio")
     host: str = os.getenv("MCP_HOST", "127.0.0.1")
-   port: int = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
+    port: int = int(os.getenv("PORT", os.getenv("MCP_PORT", "8000")))
+
     streamable_http_path: str = os.getenv("MCP_STREAMABLE_HTTP_PATH", "/mcp")
     sse_path: str = os.getenv("MCP_SSE_PATH", "/sse")
     message_path: str = os.getenv("MCP_MESSAGE_PATH", "/messages/")
