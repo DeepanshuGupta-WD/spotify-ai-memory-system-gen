@@ -224,3 +224,5 @@ __marimo__/
 
 # Node dependencies
 client/node_modules/
+
+test_mcp.py
