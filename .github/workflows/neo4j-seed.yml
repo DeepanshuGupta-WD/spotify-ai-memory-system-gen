@@ -1,0 +1,31 @@
+name: Neo4j Schema and Seed
+
+on:
+  workflow_dispatch:
+
+jobs:
+  neo4j-seed:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v6
+
+      - name: Set up Python
+        uses: actions/setup-python@v6
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          pip install -r interaction-api/requirements.txt
+
+      - name: Run Neo4j schema and seed
+        env:
+          NEO4J_URI: ${{ secrets.NEO4J_URI }}
+          NEO4J_USER: ${{ secrets.NEO4J_USER }}
+          NEO4J_PASSWORD: ${{ secrets.NEO4J_PASSWORD }}
+          NEO4J_DATABASE: ${{ secrets.NEO4J_DATABASE }}
+        run: |
+          python -m graph.builders.graph_builder --schema --seed
