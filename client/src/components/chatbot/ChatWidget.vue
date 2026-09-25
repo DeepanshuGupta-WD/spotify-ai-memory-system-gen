@@ -32,12 +32,28 @@ function handleQuickReply(reply) {
     <aside v-if="chatStore.isOpen" class="chat-widget" role="dialog" aria-label="Memory assistant">
       <header class="chat-widget__header">
         <div class="chat-widget__title">
-          <span class="chat-widget__mark" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
-              <path d="M21 12a8 8 0 1 1-3.2-6.4" />
-              <path d="M21 4v5h-5" />
-            </svg>
-          </span>
+         <button
+  type="button"
+  class="chat-widget__reload"
+  aria-label="Refresh conversation"
+  title="Refresh conversation"
+  
+  :disabled="chatStore.isLoadingHistory || chatStore.isSending"
+  @click="chatStore.refreshHistory()"
+>
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="1.8"
+    :class="{ 'is-spinning': chatStore.isLoadingHistory }"
+  >
+    <path d="M21 12a8 8 0 1 1-3.2-6.4" />
+    <path d="M21 4v5h-5" />
+  </svg>
+</button>
           <div>
             <p class="chat-widget__title-text">Listening memory</p>
             <p class="chat-widget__subtitle">Knows what you play &amp; skip</p>
@@ -101,6 +117,46 @@ function handleQuickReply(reply) {
 }
 .chat-widget__title { display: flex; align-items: center; gap: 10px; }
 .chat-widget__mark { color: var(--accent); }
+.chat-widget__reload {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--accent);
+  cursor: pointer;
+  transition: background 0.15s ease, opacity 0.15s ease;
+}
+
+.chat-widget__reload:hover:not(:disabled) {
+  background: var(--bg-raised);
+}
+
+.chat-widget__reload:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.chat-widget__reload svg {
+  transition: transform 0.2s ease;
+}
+
+.chat-widget__reload .is-spinning {
+  animation: chat-reload-spin 0.8s linear infinite;
+}
+
+@keyframes chat-reload-spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
 .chat-widget__title-text { margin: 0; font-size: 13.5px; font-weight: 700; color: var(--text-primary); }
 .chat-widget__subtitle { margin: 1px 0 0; font-size: 11px; color: var(--text-tertiary); }
 
